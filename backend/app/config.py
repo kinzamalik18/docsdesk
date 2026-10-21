@@ -24,6 +24,14 @@ class Settings(BaseSettings):
     admin_token: str = ""
     cors_origins: str = "http://localhost:3000"
 
+    # Questions per minute per visitor. Protects a free-tier API key on a public demo.
+    chat_rate_limit: int = 12
+    # Pause between eval questions so a full run stays under free-tier rate limits.
+    eval_delay_seconds: float = 6.0
+    # Show the documentation-gaps page without an admin token. Off by default because
+    # it lists whatever visitors typed.
+    public_dashboard: bool = False
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
