@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "@fontsource-variable/schibsted-grotesk";
+
+@theme {
+  --font-sans: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #eef3ea;
+  --color-rule: #c7d8c0;
+  --color-ink: #17362a;
+  --color-ink-soft: #4b6457;
+  --color-fern: #2f6b47;
+  --color-fern-deep: #1f4d33;
+  --color-margin: #b4443a;
+  --color-sheet: #ffffff;
+}
+
+:root {
+  --ledger-line: 1.75rem;
+  --margin-w: 3.75rem;
+}
+
+html {
+  color: var(--color-ink);
+  background: var(--color-sheet);
+  font-feature-settings: "tnum" 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Ledger paper: horizontal rules every line, with a red margin line on the left. */
+.ledger {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(
+      to right,
+      transparent var(--margin-w),
+      var(--color-margin) var(--margin-w),
+      var(--color-margin) calc(var(--margin-w) + 2px),
+      transparent calc(var(--margin-w) + 2px)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--ledger-line) - 1px),
+      var(--color-rule) calc(var(--ledger-line) - 1px),
+      var(--color-rule) var(--ledger-line)
+    );
+  background-attachment: local;
+}
+
+.tabular {
+  font-feature-settings: "tnum" 1;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-fern);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: enter 220ms ease-out both;
+  }
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
