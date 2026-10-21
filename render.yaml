@@ -1,0 +1,31 @@
+# Render blueprint for the DocsDesk API. Secrets are marked sync: false,
+# so Render asks for them during setup instead of reading them from this file.
+services:
+  - type: web
+    name: docsdesk-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_CHAT_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_EMBED_MODEL
+        value: gemini-embedding-001
+      - key: EMBED_DIM
+        value: "768"
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false
+      - key: COMPANY_NAME
+        value: Fernbill
+      - key: MIN_SIMILARITY
+        value: "0.45"
