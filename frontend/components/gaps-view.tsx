@@ -68,7 +68,7 @@ export function GapsView() {
       {gaps && gaps.length > 0 && (
         <>
           <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm text-ink-soft">{gaps.length} unanswered questions, newest first</p>
+            <p className="text-sm text-ink-soft">{gaps.length} unanswered {gaps.length === 1 ? "question" : "questions"}, newest first</p>
             <button onClick={load} className="text-sm text-fern-deep underline underline-offset-4">
               Refresh
             </button>

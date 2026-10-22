@@ -7,6 +7,14 @@ The demo runs on the help center of **Fernbill, a fictional invoicing app**. The
 - Live demo: _link added after deployment_
 - API: _link added after deployment_
 
+<p align="center">
+  <img src="docs/screenshots/chat.png" alt="DocsDesk answering a question with a numbered source, and declining a question the help docs don't cover" width="820">
+  &nbsp;
+  <img src="docs/screenshots/mobile.png" alt="DocsDesk on a phone" width="190">
+</p>
+
+<sub>Local preview running on the offline test model, so the answer text is a plain quote from the source. Screenshots with real Gemini answers will replace these after deployment.</sub>
+
 ## What it does
 
 - **Answers with sources.** Answers carry numbered references. Clicking one shows the exact passage from the help article.
