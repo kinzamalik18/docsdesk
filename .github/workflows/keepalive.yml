@@ -1,0 +1,30 @@
+name: Keep demo awake
+
+# Supabase pauses free projects after a week without activity, and Render's free
+# tier sleeps after 15 minutes. This pings the live API every three days. The
+# /api/info endpoint runs a small database query, which counts as activity for
+# the shared Supabase project that DocsDesk and InboxGate both use.
+#
+# Set the repository variable DEMO_API_URL (Settings > Secrets and variables >
+# Actions > Variables) to the deployed API URL. Until then this job does nothing.
+
+on:
+  schedule:
+    - cron: "17 6 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    if: ${{ vars.DEMO_API_URL != '' }}
+    steps:
+      - name: Wake the API and touch the database
+        run: |
+          # The first request can take up to a minute while Render wakes the service.
+          for attempt in 1 2 3; do
+            if curl -fsS --max-time 90 "${{ vars.DEMO_API_URL }}/api/info"; then
+              exit 0
+            fi
+            sleep 20
+          done
+          exit 1
