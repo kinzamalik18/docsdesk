@@ -4,8 +4,10 @@ A support assistant that answers customer questions from a company's own help do
 
 The demo runs on the help center of **Fernbill, a fictional invoicing app**. The 14 articles, prices and policies are made up for this project.
 
-- Live demo: _link added after deployment_
-- API: _link added after deployment_
+- Live demo: https://docsdesk-ten.vercel.app
+- API: https://docsdesk-api.onrender.com/api/info
+
+The demo runs on free hosting that sleeps when idle, so the first question can take up to a minute.
 
 <p align="center">
   <img src="docs/screenshots/chat.png" alt="DocsDesk answering a question with a numbered source, and declining a question the help docs don't cover" width="820">
