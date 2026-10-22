@@ -8,7 +8,7 @@ class Settings(BaseSettings):
 
     llm_provider: str = "gemini"
     gemini_api_key: str = ""
-    gemini_chat_model: str = "gemini-2.5-flash"
+    gemini_chat_model: str = "gemini-3.5-flash-lite"
     gemini_embed_model: str = "gemini-embedding-001"
     embed_dim: int = 768
 

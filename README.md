@@ -80,9 +80,11 @@ Run the tests with `pytest` from `backend/`.
 
 ## Deploy
 
-1. **Database:** create a free Supabase project, then copy the connection string (Session pooler) from Project settings > Database. The API creates its tables and the `vector` extension on first start.
-2. **API:** in Render, create a Blueprint from this repo. It reads `render.yaml`. Fill in `GEMINI_API_KEY`, `DATABASE_URL` and `CORS_ORIGINS` (your Vercel URL). Render generates `ADMIN_TOKEN`; you'll find it in the service's Environment tab.
-3. **Frontend:** in Vercel, import the repo with `frontend` as the root directory and set `NEXT_PUBLIC_API_URL` to the Render URL.
+1. **Database:** create a free Supabase project. In Project settings > Database, note the Session pooler host and user (Render can't reach Supabase's IPv6-only direct address).
+2. **Shared settings:** in Render, create two environment groups. `gemini` holds `GEMINI_API_KEY`. `supabase` holds `DATABASE_URL` (the pooler URL without the password, ending in `?sslmode=require`) and `PGPASSWORD`. Keeping the password in its own variable means it is pasted once and never ends up in a URL.
+3. **API:** create a Blueprint from this repo. It reads `render.yaml`, attaches both groups and generates `ADMIN_TOKEN` (find it in the service's Environment tab). The API creates its tables and the `vector` extension on first start.
+4. **Frontend:** in Vercel, import the repo with `frontend` as the root directory and set `NEXT_PUBLIC_API_URL` to the Render URL. Then set `CORS_ORIGINS` on the API to the Vercel URL.
+5. **Keep it awake:** set the repository variable `DEMO_API_URL` to the API URL. The `Keep demo awake` workflow then pings it every three days, so the free Supabase project never pauses for inactivity.
 
 Render's free tier sleeps after 15 minutes without traffic, so the first question after a quiet spell can take up to a minute. The UI says so while it waits.
 

@@ -1,30 +1,31 @@
-# Render blueprint for the DocsDesk API. Secrets are marked sync: false,
-# so Render asks for them during setup instead of reading them from this file.
+# Render blueprint for the DocsDesk API.
+#
+# Reads two environment groups created once in the Render dashboard:
+#   gemini    GEMINI_API_KEY
+#   supabase  DATABASE_URL (no password in it) and PGPASSWORD
+# After the frontend is deployed, set CORS_ORIGINS to its URL.
 services:
   - type: web
     name: docsdesk-api
     runtime: docker
     rootDir: backend
     dockerfilePath: ./Dockerfile
+    region: singapore
     plan: free
     healthCheckPath: /health
     envVars:
+      - fromGroup: gemini
+      - fromGroup: supabase
       - key: LLM_PROVIDER
         value: gemini
-      - key: GEMINI_API_KEY
-        sync: false
       - key: GEMINI_CHAT_MODEL
-        value: gemini-2.5-flash
+        value: gemini-3.5-flash-lite
       - key: GEMINI_EMBED_MODEL
         value: gemini-embedding-001
       - key: EMBED_DIM
         value: "768"
-      - key: DATABASE_URL
-        sync: false
       - key: ADMIN_TOKEN
         generateValue: true
-      - key: CORS_ORIGINS
-        sync: false
       - key: COMPANY_NAME
         value: Fernbill
       - key: MIN_SIMILARITY
