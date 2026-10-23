@@ -15,7 +15,7 @@ The demo runs on free hosting that sleeps when idle, so the first question can t
   <img src="docs/screenshots/mobile.png" alt="DocsDesk on a phone" width="190">
 </p>
 
-<sub>Local preview running on the offline test model, so the answer text is a plain quote from the source. Screenshots with real Gemini answers will replace these after deployment.</sub>
+<sub>Real answers from the deployed app (Gemini, gemini-3.5-flash-lite): one cited from the security article, one declined because no article covers it.</sub>
 
 ## What it does
 
